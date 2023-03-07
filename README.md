@@ -19,3 +19,11 @@ O incremento à pontuação de frequência é calculado através de coisas como:
 * quantidade de dias seguidos em que utilizou a plataforma
 
 **vale ressaltar que todos os exemplos citados acima ( com a exceção do último ) possuem um limite diário**
+
+## Equipe
+
+Equipe composta por estudantes do 2º / 3º período do CESAR School;
+
+* Victor Aroucha Guerra ( vag@cesar.school )
+* Eduardo Cavalcanti de Melo ( emcm@cesar.school )
+* Demétrius Souza Pires
