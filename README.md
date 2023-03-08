@@ -23,3 +23,7 @@ Equipe composta por estudantes do 2º / 3º período do CESAR School;
 * Bernardo Meneses Nunes ( bmn@cesar.school )
 * Luiz Felipe Teixeira ( lftm@cesar.school )
 * Arthur Gabriel Torres ( agts@cesar.school )
+
+# Jira
+
+* https://fdsproject.atlassian.net/jira/software/projects/ZOO/boards/4
