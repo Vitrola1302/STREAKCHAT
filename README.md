@@ -1,6 +1,6 @@
-# STREAKCHAT
+# DOAZOO
 ## Definições
-o projeto se constitui em uma rede social web que recompensa o usuário por utilizá-la e falar com as mesmas pessoas com frequência.
+O projeto se constitui em uma plataforma web de adoção de animais.
 
 alguns exemplos de recompensas são:
 * emoji's
