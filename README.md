@@ -27,3 +27,7 @@ Equipe composta por estudantes do 2º / 3º período do CESAR School;
 * Victor Aroucha Guerra ( vag@cesar.school )
 * Eduardo Cavalcanti de Melo ( emcm@cesar.school )
 * Demétrius Souza Pires
+
+## Jira
+
+* https://fdsproject.atlassian.net/jira/software/projects/ZOO/boards/4
