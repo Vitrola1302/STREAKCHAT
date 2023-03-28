@@ -27,3 +27,4 @@ Equipe composta por estudantes do 2º / 3º período do CESAR School;
 ## Links
 
 * Jira Software: https://fdsproject.atlassian.net/jira/software/projects/STREAK/boards/3
+* Figma: https://www.figma.com/file/q1SQhjG1wJWtwBb2tNaNcg/Untitled?t=RUFiP7sK4985nHxK-1
