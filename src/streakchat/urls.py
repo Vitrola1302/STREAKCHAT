@@ -6,5 +6,7 @@ from . import views
 app_name = 'streakchat'
 
 urlpatterns = [
-    path(route='', view=views.index, name='index'),
-]
+    path(route='', view=views.landingPage, name='landingPage'),
+    path(route='register', view=views.registerPage, name='registerPage'),
+    path(route='login', view=views.loginPage, name='loginPage'),
+]   
