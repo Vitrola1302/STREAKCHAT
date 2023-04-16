@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import RegisterForm
 from django.contrib import messages
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
 
 def registerPage(request):
@@ -10,7 +10,7 @@ def registerPage(request):
         if form.is_valid():
             user = form.save()
             messages.success(request, 'Registration Successful.')
-            return redirect('loginPage')
+            return render('loginPage')
         else:
             messages.error(request, 'Unsuccessful registration. Invalid information.')
     else:
@@ -27,7 +27,7 @@ def loginPage(request):
             if user is not None:
                 login(request, user)
                 messages.info(request, f'You are now logged in as {username}')
-                return redirect('landingPage')
+                return redirect('')
             else:
                 messages.error(request, 'Invalid username or password.')
         else:
@@ -35,6 +35,10 @@ def loginPage(request):
     form = AuthenticationForm()
     return render(request, 'accounts/login.html', context={'form':form})
 
+def logout_request(request):
+	logout(request)
+	messages.info(request, "You have successfully logged out.") 
+	return redirect('')
+
 def landingPage(request):
     return render(request, 'landingpage/index.html')
-
