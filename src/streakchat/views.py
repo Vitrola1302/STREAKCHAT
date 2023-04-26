@@ -10,7 +10,7 @@ def registerPage(request):
         if form.is_valid():
             user = form.save()
             messages.success(request, 'Registration Successful.')
-            return redirect('loginPage')
+            return render(request, 'landingpage/index.html')
         else:
             messages.error(request, 'Unsuccessful registration. Invalid information.')
     else:
@@ -26,8 +26,8 @@ def loginPage(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                messages.info(request, f'You are now logged in as {username}')
-                return redirect('landingPage')
+                messages.info(request, f'You are now logged in as {username}')  
+                return render(request, 'landingpage/index.html')
             else:
                 messages.error(request, 'Invalid username or password.')
         else:
@@ -35,10 +35,10 @@ def loginPage(request):
     form = AuthenticationForm()
     return render(request, 'accounts/login.html', context={'form':form})
 
-def logout_request(request):
+def logoutPage(request):
 	logout(request)
 	messages.info(request, "You have successfully logged out.") 
-	return redirect('landingPage')
+	return render(request, 'accounts/logout.html')
 
 def landingPage(request):
     return render(request, 'landingpage/index.html')
