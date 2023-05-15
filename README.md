@@ -31,7 +31,7 @@ Equipe composta por estudantes do 2º / 3º período do CESAR School;
 * Eduardo Cavalcanti de Melo ( emcm@cesar.school )
 * Demétrius Souza Pires ( dspj@cesar.school )
 * Gabirel Pontes Correia ( gpc@cesar.school )
-* Vinicius Souza Júnior ( vspg@cesar.school )
+* Vinicius souza dantas ( vsdg@cesar.school )
 
 ## Metodologia
 * Pair programming:
