@@ -11,4 +11,4 @@ urlpatterns = [
     path(route='login', view=loginPage, name='loginPage'),
     path(route='logout', view=logoutRequest, name='logoutPage'),
     path(route='home', view=homePage, name='homePage')
-]   
+]

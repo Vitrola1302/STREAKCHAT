@@ -1,0 +1,9 @@
+<h2>Choose Your Name</h2>
+
+</p>This is the name that will be displayed to your friends! <p>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
