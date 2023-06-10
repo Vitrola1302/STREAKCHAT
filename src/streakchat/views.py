@@ -16,7 +16,7 @@ def registerPage(request):
             login(request, registered_user)
             MyProfile.objects.create(user=registered_user.username)
             messages.success(request, 'Registration Successful.')
-            return homePage(request)
+            return redirect('/home')
         
         else:
             messages.error(request, 'Unsuccessful registration. Invalid information.')
@@ -40,7 +40,7 @@ def loginPage(request):
             if user is not None:
                 login(request, user)
                 messages.info(request, f'You are now logged in as {username}')
-                return homePage(request)
+                return redirect('/home')
             
             else:
                 messages.error(request, 'Invalid username or password.')
@@ -56,7 +56,7 @@ def logoutRequest(request):
 	logout(request)
 	messages.info(request, "You have successfully logged out.")
          
-	return landingPage(request)
+	return redirect('/')
 
 
 
@@ -70,7 +70,7 @@ def firstLoginPage(request):
         if form.is_valid():
             logged_user.name = form.cleaned_data["name"]
             logged_user.save()
-            return homePage(request)
+            return redirect('/home')
 
     else:
         form = NameForm()
