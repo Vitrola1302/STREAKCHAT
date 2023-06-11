@@ -6,8 +6,12 @@
 </head>
 <body>
     <h1>StreakChat</h1>
-    <p>{{name}}</p>
-    <p>Streak:{{ streak }}</p>
+    <p>{{user.name}}</p>
+    <p>Streak: {{ user.streak }}</p>
     
+    <a href="/home/addcontact">Add Friend</a><br/>
+    <a href="/home/createchat">Create Chat</a><br/>
     <a href="/logout">Logout</a>
+
+    <p>Contacts</p>
 </body>

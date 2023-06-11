@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
-from .forms import RegisterForm, NameForm
+from .forms import RegisterForm, NameForm, AddContactForm
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
-from .models import MyProfile
+from .models import MyProfile, ContactList, Contact
 
 
 def registerPage(request):
@@ -14,7 +14,7 @@ def registerPage(request):
         if form.is_valid():
             registered_user = form.save()
             login(request, registered_user)
-            MyProfile.objects.create(user=registered_user.username)
+            new_profile = MyProfile.objects.create(user=registered_user.username)
             messages.success(request, 'Registration Successful.')
             return redirect('/home')
         
@@ -62,7 +62,7 @@ def logoutRequest(request):
 
 def firstLoginPage(request):
 
-    logged_user = MyProfile.getProfileByUsername(request.user.username)
+    logged_user = MyProfile.get_profile_by_username(request.user.username)
 
     if request.method == 'POST':
         form = NameForm(request.POST)
@@ -84,12 +84,48 @@ def landingPage(request):
 
 def homePage(request):
 
-    logged_user = MyProfile.getProfileByUsername(request.user.username)
+    logged_user = MyProfile.get_profile_by_username(request.user.username)
 
     if logged_user.name == '':    
         return firstLoginPage(request)
-    
-    name = logged_user.name
-    streak = logged_user.streak
-    return render(request, 'home/index.html', context={'name':name,'streak':streak})
 
+    return render(request, 'home/index.html', context={'user':logged_user})
+
+
+def addContactPage(request):
+    
+    logged_user = MyProfile.get_profile_by_username(request.user.username)
+
+    if request.method == 'POST':
+        form = AddContactForm(request.POST)
+
+        if form.is_valid():
+            name = form.cleaned_data["name"]
+            user = form.cleaned_data["username"]
+
+            if not MyProfile.objects.filter(user=user).exists():
+                messages.error(request, 'Threre is no user with the informed username.')
+
+            else:
+                contacts = logged_user.contact_list
+
+                #lista de contatos do usuário vazia, cria uma nova
+                if contacts == None:
+                    new_contact_list = ContactList.objects.create(profile=logged_user)
+                    contacts = new_contact_list
+                    logged_user.save()
+
+                #se o contato já existe na lista de contatos do usuário
+                if contacts.get_contact_by_username(user).exists():
+                    messages.error(request, f'You already have {name} in your contact list.')
+                
+                #adiciona o contato na lista
+                else:
+                    new_contact = MyProfile.objects.filter(user=user).get()
+                    Contact.objects.create(contact_list=contacts, user=new_contact, name=name)
+                    messages.info(request, f'{name} successfully added to {logged_user.name}\'s contact list.')
+                    
+    else:
+        form = AddContactForm()
+
+    return render(request, 'home/addcontact.html', context={'form':form})

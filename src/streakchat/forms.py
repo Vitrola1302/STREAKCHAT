@@ -13,7 +13,7 @@ class RegisterForm(UserCreationForm):
     def save(self, commit=True):
         user = super(RegisterForm, self).save(commit=False)
         user.email = self.cleaned_data['email']
-        
+
         if commit:
             user.save()
         return user
@@ -22,3 +22,9 @@ class RegisterForm(UserCreationForm):
 class NameForm(forms.Form):
 
     name = forms.CharField(max_length=30)
+
+
+class AddContactForm(forms.Form):
+    
+    name = forms.CharField(max_length=30)
+    username = forms.CharField(max_length=150)
