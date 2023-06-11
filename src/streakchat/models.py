@@ -19,9 +19,6 @@ class ContactList(models.Model):
     
     def get_contact_by_username(self, search):
         return Contact.objects.filter(contact_list=self, user__user=search)
-    
-    def get_all_contacts(self):
-        return Contact.objects.filter(contact_list=self)
 
 
 class Contact(models.Model):
@@ -29,3 +26,7 @@ class Contact(models.Model):
     contact_list = models.ForeignKey('ContactList', on_delete=models.CASCADE, null=True, verbose_name="contact_list")
     user = models.ForeignKey(MyProfile, on_delete=models.CASCADE, verbose_name="user")
     name = models.TextField(max_length=30, default='New Contact') 
+    streak = models.IntegerField(default=0)
+
+    def get_streak(self):
+        return self.streak

@@ -14,4 +14,17 @@
     <a href="/logout">Logout</a>
 
     <p>Contacts</p>
+    {% if not user.contact_list %}
+    <p>No added contacts</p>
+    {%else%}
+    <table>
+        {%for contact in contacts%}
+        <tr>
+            <td>{{contact.name}}</td>
+            <td> |</td>
+            <td> Streak: {{contact.streak}}</td>
+        </tr>
+        {%endfor%}
+    </table>
+    {%endif%}
 </body>

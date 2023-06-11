@@ -88,8 +88,11 @@ def homePage(request):
 
     if logged_user.name == '':    
         return firstLoginPage(request)
+    
+    contacts = list(Contact.objects.filter(contact_list=logged_user.contact_list))
+    contacts.sort(key=Contact.get_streak)
 
-    return render(request, 'home/index.html', context={'user':logged_user})
+    return render(request, 'home/index.html', context={'user':logged_user, 'contacts':contacts})
 
 
 def addContactPage(request):
@@ -101,28 +104,27 @@ def addContactPage(request):
 
         if form.is_valid():
             name = form.cleaned_data["name"]
-            user = form.cleaned_data["username"]
+            username = form.cleaned_data["username"]
 
-            if not MyProfile.objects.filter(user=user).exists():
+            #se o usuário descrito não existe
+            if not MyProfile.objects.filter(user=username).exists():
                 messages.error(request, 'Threre is no user with the informed username.')
 
             else:
-                contacts = logged_user.contact_list
-
                 #lista de contatos do usuário vazia, cria uma nova
-                if contacts == None:
+                if not logged_user.contact_list:
                     new_contact_list = ContactList.objects.create(profile=logged_user)
-                    contacts = new_contact_list
+                    logged_user.contact_list = new_contact_list
                     logged_user.save()
 
                 #se o contato já existe na lista de contatos do usuário
-                if contacts.get_contact_by_username(user).exists():
+                if logged_user.contact_list.get_contact_by_username(username).exists():
                     messages.error(request, f'You already have {name} in your contact list.')
                 
                 #adiciona o contato na lista
                 else:
-                    new_contact = MyProfile.objects.filter(user=user).get()
-                    Contact.objects.create(contact_list=contacts, user=new_contact, name=name)
+                    new_contact = MyProfile.objects.filter(user=username).get()
+                    Contact.objects.create(contact_list=logged_user.contact_list, user=new_contact, name=name)
                     messages.info(request, f'{name} successfully added to {logged_user.name}\'s contact list.')
                     
     else:
